@@ -11,6 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
     <title>@yield('title')</title>
   </head>
   <body>
@@ -26,7 +30,7 @@
 
     @if(session()->has('userID'))
       <a href="{{url('/logout')}}">
-        <i style="position: fixed; left: 35px; top: 35px;" class="text-success border border-success border-2 px-2 py-1 rounded h1 bi bi-box-arrow-right" data-bs-toggle="tooltip" data-bs-placement="right" title="Log out!"></i>
+        <i style="position: fixed; right: 35px; top: 35px;" class="text-success border border-success border-2 px-2 py-1 rounded h1 bi bi-box-arrow-left" data-bs-toggle="tooltip" data-bs-placement="right" title="Log out!"></i>
       </a>
   @endif
 

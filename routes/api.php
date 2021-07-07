@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\weatherController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// get(towns)
+Route::get('getCities', [weatherController::class, 'getCities']);
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\weatherController;
 
 
 Route::get('/', [authController::class, 'login']);
@@ -15,3 +16,7 @@ Route::get('/logout', function () {
   session()->forget('userID');
   return redirect(url('/'));
 });
+
+
+Route::get('weather', [weatherController::class, 'main']);
+Route::post('updateCities', [weatherController::class, 'updateCities']);
