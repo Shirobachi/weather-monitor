@@ -41,7 +41,7 @@
     const App = {
       data() {
         return {
-          urlAPI: "{{url('api/getCities')}}",
+          urlAPI: "/api/getCities",
           cities: [],
           citiesMatched: [],
           input: ''
@@ -53,7 +53,7 @@
             this.cities = response.data.map(x => x) 
             this.citiesMatched = this.cities 
           })
-          this.processSearch = _.debounce(this.copyMatched, 100)
+          this.processSearch = _.debounce(this.copyMatched, 200)
       },
       methods: {
         copyMatched(){
