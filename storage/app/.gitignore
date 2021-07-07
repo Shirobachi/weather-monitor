@@ -1,3 +1,4 @@
 *
 !public/
+!cities.min.json
 !.gitignore
