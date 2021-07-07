@@ -9,11 +9,24 @@ use Storage;
 
 class weatherController extends Controller
 {
-    function main(){
-        return view('weather');
+    function dashboard(){
+        if(usersCities::where('user', session()->get('userID'))->get()->count() == 0){
+            $info = array(
+                'title' => 'No following towns yet',
+                'desc' => "Follow some towns before you see dashbord!",
+                'type' => 'warning'
+            );
+            return view('updateTownList', compact('info'));
+        }
+
+        return view('dashboard');
     }
 
-    function getCities(){
+    function updateCitiesShow(){
+        return view('updateTownList');
+    }
+
+    function getTowns(){
 
         $json = Storage::disk('local')->get('cities.min.json');
         $json = json_decode($json, true);
@@ -25,14 +38,25 @@ class weatherController extends Controller
         $userID = session()->get('userID');
         $cities = $r->cities;
 
-        if(count($cities) > 10){
+        if($cities && count($cities) > 10){
             $info = array(
                 'title' => 'You are NOT a VIP',
                 'desc' => 'You can make up to 10 following towns!',
                 'type' => 'warning'
             );
 
-            return view('weather', compact('info'));
+            return view('dashboard', compact('info'));
+        }
+        else if(! $cities){
+            usersCities::where('user', $userID)->delete();
+
+            $info = array(
+                'title' => 'No following towns',
+                'desc' => 'Your following town list is empty now!',
+                'type' => 'warning'
+            );
+
+            return view('dashboard', compact('info'));
         }
 
         $temp = [];
@@ -49,6 +73,6 @@ class weatherController extends Controller
             'desc' => 'Your list of followinf towns is now updated!',
         );
 
-        return view('weather', compact('info'));
+        return view('dashboard', compact('info'));
     }
 }

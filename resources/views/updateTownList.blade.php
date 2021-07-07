@@ -41,7 +41,7 @@
     const App = {
       data() {
         return {
-          urlAPI: "/api/getCities",
+          urlAPI: "/api/towns",
           cities: [],
           citiesMatched: [],
           input: ''

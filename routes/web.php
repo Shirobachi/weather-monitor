@@ -18,5 +18,6 @@ Route::get('/logout', function () {
 });
 
 
-Route::get('weather', [weatherController::class, 'main']);
+Route::get('dashboard', [weatherController::class, 'dashboard']);
+Route::get('updateCities', [weatherController::class, 'updateCitiesShow']);
 Route::post('updateCities', [weatherController::class, 'updateCities']);
