@@ -41,49 +41,29 @@ class weather extends Command
      */
     public function handle()
     {
-        // echo 'test';
-        // usersCities::create( [ 'user' => 0, 'city' => 0 ] );    
-
-        $temp = usersCities::select('city')->distinct()->get();
-        dump($temp);
+        $townsIDs = usersCities::select('city')->distinct()->get();
         
         $jsonCode = '';
 
-        foreach($temp as $s)
-            {
-                $jsonCode .= $s -> city . ',';
-            }
-
+        foreach($townsIDs as $s)
+            $jsonCode .= $s -> city . ',';
         $jsonCode = substr($jsonCode, 0, -1);
-        dump($jsonCode);
-        dump(count($temp));
 
         $key=env('WEATHER_API_KEY', 'ERROR');
-        dump($key);
-
         $link = "https://api.openweathermap.org/data/2.5/group?appid=$key&units=metric&id=$jsonCode";
-        dump($link);
 
-        $t = Http::get($link);
-        $t = json_decode($t, true);
-
-        dump($t);
-
+        $respond = json_decode(Http::get($link), true);
         $data = [];
         
-        foreach($t['list'] as $f){
-            dump($f['main']['temp'] . '°C and ' . $f['main']['humidity'] . '% of humidity in ' . $f['name'] . '[ ' . $f['id'] . ' ]');
-            array_push($data, [ 'temp' => $f['main']['temp'], 'humidity' => $f['main']['humidity'], 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s'), 'townID' => $f['id'] ] );
+        foreach($respond['list'] as $f){
+            array_push($data, [ 
+                'created_at' => date('Y-m-d H:i:s'), 
+                'updated_at' => date('Y-m-d H:i:s'), 
+                'temp' => $f['main']['temp'], 
+                'humidity' => $f['main']['humidity'], 
+                'townID' => $f['id'] ] );
         }
 
-        dump(weatherInfo::all()->count());
-        dump($data);
-
         weatherInfo::insert($data);
-
-        dump(weatherInfo::all()->count());
-
-        dump(date('Y-m-d H:i:s') . ' <-- data');
-
     }
 }
