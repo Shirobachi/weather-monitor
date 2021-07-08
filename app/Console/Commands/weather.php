@@ -73,7 +73,7 @@ class weather extends Command
         
         foreach($t['list'] as $f){
             dump($f['main']['temp'] . '°C and ' . $f['main']['humidity'] . '% of humidity in ' . $f['name'] . '[ ' . $f['id'] . ' ]');
-            array_push($data, [ 'temp' => $f['main']['temp'], 'humidity' => $f['main']['humidity'] ] );
+            array_push($data, [ 'temp' => $f['main']['temp'], 'humidity' => $f['main']['humidity'], 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s'), 'townID' => $f['id'] ] );
         }
 
         dump(weatherInfo::all()->count());
@@ -83,7 +83,7 @@ class weather extends Command
 
         dump(weatherInfo::all()->count());
 
-        dump(date('Y-m-d H:i:s' . 'lol'));
+        dump(date('Y-m-d H:i:s') . ' <-- data');
 
     }
 }
