@@ -18,7 +18,7 @@ class authController extends Controller
 
         if($user && Hash::check($r->password, $user->password)){
             session()->put('userID', $user->id);
-            return redirect(url('weather'));
+            return redirect(url('dashboard'));
         }
         else{
             $info['type'] = 'danger';
