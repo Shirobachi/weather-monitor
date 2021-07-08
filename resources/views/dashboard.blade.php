@@ -15,10 +15,10 @@
 
       <div id="Vue">
         <a href="{{url('updateCities')}}">
-          <button id="toggleAll" class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Show all</button>
+          <button id="toggleAll" class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Update followinf towns!</button>
         </a>
 
-  
+
 
 
     </div>
