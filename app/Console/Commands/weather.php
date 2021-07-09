@@ -58,8 +58,8 @@ class weather extends Command
         
         foreach($respond['list'] as $r){
             array_push($data, [ 
-                'created_at' => date('Y-m-d H:i:s'), 
-                'updated_at' => date('Y-m-d H:i:s'), 
+                'created_at' => date('Y-m-d H:i:s') -> addHour(2), 
+                'updated_at' => date('Y-m-d H:i:s') -> addHour(2), 
                 'temp' => $r['main']['temp'], 
                 'humidity' => $r['main']['humidity'], 
                 'townID' => $r['id'] ] );
