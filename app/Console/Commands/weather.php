@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 use App\Models\usersCities;
 use App\Models\weatherInfo;
@@ -58,8 +59,8 @@ class weather extends Command
         
         foreach($respond['list'] as $r){
             array_push($data, [ 
-                'created_at' => date('Y-m-d H:i:s'), 
-                'updated_at' => date('Y-m-d H:i:s'), 
+                'created_at' => now() -> addHour(2), 
+                'updated_at' => now() -> addHour(2), 
                 'temp' => $r['main']['temp'], 
                 'humidity' => $r['main']['humidity'], 
                 'townID' => $r['id'] ] );
