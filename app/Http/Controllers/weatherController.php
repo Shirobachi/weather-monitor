@@ -7,6 +7,7 @@ use App\Models\town;
 use App\Models\weatherInfo;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class weatherController extends Controller
 {
@@ -87,14 +88,20 @@ class weatherController extends Controller
             $temp = [];
             $temp['townName'] = town::where('APIID', $t -> city) -> first() -> name;
             
-            if($data == null){
-                $temp['temp'] = null;
-                $temp['humidity'] = null;
+            if($data == null)
+            {
+                try{
+                    Artisan::call('weather:pull');
+                    $data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
+                }
+                catch (SomeException $e){
+                    $temp['temp'] = null;
+                    $temp['humidity'] = null; 
+                }
             }
-            else{
-                $temp['temp'] = $data -> temp;
-                $temp['humidity'] = $data -> humidity;
-            }
+                
+            $temp['temp'] = $data -> temp;
+            $temp['humidity'] = $data -> humidity;
 
             array_push($respons, $temp);
         }
