@@ -16,6 +16,7 @@ class CreateWeatherInfosTable extends Migration
         Schema::create('weather_infos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('townID');
             $table->decimal('temp', 4, 2);
             $table->decimal('humidity', 4, 1);
         });
