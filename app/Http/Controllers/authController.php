@@ -10,7 +10,10 @@ use App\Models\user;
 class authController extends Controller
 {
     function login(){
-        return view('auth/login');
+        if(session()->has('userID'))
+            return redirect(url('dashboard'));
+        else
+            return view('auth/login');
     }
 
     function tryLogin(request $r){
@@ -29,7 +32,10 @@ class authController extends Controller
     }
     
     function register(){
-        return view('auth/register');
+        if(session()->has('userID'))
+            return redirect(url('dashboard'));
+        else
+            return view('auth/register');
     }
 
     function signup(request $r){
