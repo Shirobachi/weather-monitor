@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\usersCities;
+use App\Models\town;
 
 use Illuminate\Http\Request;
-use Storage;
 
 class weatherController extends Controller
 {
     function dashboard(){
+        if(! session()->has('userID'))
+            return redirect(url('/'));
+
         if(usersCities::where('user', session()->get('userID'))->get()->count() == 0){
             $info = array(
                 'title' => 'No following towns yet',
@@ -28,8 +31,11 @@ class weatherController extends Controller
 
     function getTowns(){
 
-        $json = Storage::disk('local')->get('cities.min.json');
-        $json = json_decode($json, true);
+        return response(town::all(), 201);
+        town::all();
+        dump(town::select('name', 'APIID')->get());
+
+        dd();
         
         return response($json, 201);
     }
@@ -56,7 +62,7 @@ class weatherController extends Controller
                 'type' => 'warning'
             );
 
-            return view('dashboard', compact('info'));
+            return view('updateTownList', compact('info'));
         }
 
         $temp = [];
@@ -70,9 +76,13 @@ class weatherController extends Controller
 
         $info = array(
             'title' => 'Updated!',
-            'desc' => 'Your list of followinf towns is now updated!',
+            'desc' => 'Your list of following towns is now updated!',
         );
 
         return view('dashboard', compact('info'));
+    }
+
+    function weatherNow($id){
+        dump($id);
     }
 }
