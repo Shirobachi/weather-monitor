@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\usersCities;
 use App\Models\weatherInfo;
 
+
 class weather extends Command
 {
     /**
@@ -45,8 +46,8 @@ class weather extends Command
         
         $jsonCode = '';
 
-        foreach($townsIDs as $s)
-            $jsonCode .= $s -> city . ',';
+        foreach($townsIDs as $t)
+            $jsonCode .= $t -> city . ',';
         $jsonCode = substr($jsonCode, 0, -1);
 
         $key=env('WEATHER_API_KEY', 'ERROR');
@@ -55,13 +56,13 @@ class weather extends Command
         $respond = json_decode(Http::get($link), true);
         $data = [];
         
-        foreach($respond['list'] as $f){
+        foreach($respond['list'] as $r){
             array_push($data, [ 
                 'created_at' => date('Y-m-d H:i:s'), 
                 'updated_at' => date('Y-m-d H:i:s'), 
-                'temp' => $f['main']['temp'], 
-                'humidity' => $f['main']['humidity'], 
-                'townID' => $f['id'] ] );
+                'temp' => $r['main']['temp'], 
+                'humidity' => $r['main']['humidity'], 
+                'townID' => $r['id'] ] );
         }
 
         weatherInfo::insert($data);

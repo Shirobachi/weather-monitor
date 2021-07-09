@@ -25,7 +25,7 @@
           @csrf
             <span class="input-group-addon" v-for="c in cities" v-show="c.match || c.check">
               <label class="pe-4">
-                <input type="checkbox" name="cities[]" :value="c.APIID" v-model="c.check"> @{{c.name}} [@{{c.id}}]
+                <input type="checkbox" name="cities[]" :value="c.APIID" v-model="c.check"> @{{c.name}}
               </label>
             </span>
           </div>
