@@ -18,8 +18,6 @@ class towns extends Seeder
         $json = Storage::disk('local')->get('cities.min.json');
         $json = json_decode($json, true);
 
-        
-
         DB::table('towns')->insert($json);
     }
 }

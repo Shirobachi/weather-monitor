@@ -35,6 +35,7 @@ class weatherController extends Controller
     }
 
     function updateCities(request $r){
+
         $userID = session()->get('userID');
         $cities = $r->cities;
 
