@@ -30,14 +30,7 @@ class weatherController extends Controller
     }
 
     function getTowns(){
-
         return response(town::all(), 201);
-        town::all();
-        dump(town::select('name', 'APIID')->get());
-
-        dd();
-        
-        return response($json, 201);
     }
 
     function updateCities(request $r){
