@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-
     <div class="row">
         <div class="offset-md-4 col-md-4 col-10 offset-1 mt-5">
 

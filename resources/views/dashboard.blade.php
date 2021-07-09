@@ -1,6 +1,6 @@
 @extends('common')
 
-@section('title', 'Log in!')
+@section('title', 'Dashboard!')
 
 @section('content')
 
@@ -15,7 +15,7 @@
 
       <div id="Vue">
         <a href="{{url('updateCities')}}">
-          <button id="toggleAll" class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Update followinf towns!</button>
+          <button id="toggleAll" class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Update following towns!</button>
         </a>
 
 
