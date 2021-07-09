@@ -14,7 +14,6 @@
     @endif
 
       <div id="Vue">
-
         <div class="input-group mb-3">
           <span class="input-group-text" id="inputGroup-sizing-lg">Search: </span>
           <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" v-model="input">
@@ -24,13 +23,14 @@
         <form id="form" method="post" action="{{url('updateCities')}}">
           <div class="input-group">
           @csrf
-            <span class="input-group-addon" v-for="c in citiesMatched">
+            <span class="input-group-addon" v-for="c in cities" v-show="c.match || c.check">
               <label class="pe-4">
-                <input type="checkbox" name="cities[]" :value="c.APIID"> @{{c.name}}
+                <input type="checkbox" name="cities[]" :value="c.APIID" v-model="c.check"> @{{c.name}} [@{{c.id}}]
               </label>
             </span>
           </div>
         </form>
+
       </div>
 
     </div>
@@ -43,26 +43,31 @@
         return {
           urlAPI: "/api/towns",
           cities: [],
-          citiesMatched: [],
           input: ''
         }
       },
       created() {
         axios.get(this.urlAPI, {})
           .then((response) => {
-            this.cities = response.data.map(x => x) 
-            this.citiesMatched = this.cities 
+            this.cities = response.data.map(x => x)
+            for (const town of this.cities) {
+              town.check = false;
+              town.match = true;
+            }
           })
-          this.processSearch = _.debounce(this.copyMatched, 200)
+          this.processSearch = _.debounce(this.updateSearch, 200)
       },
       methods: {
-        copyMatched(){
+        updateSearch(){
           if (this.input == '')
-          this.citiesMatched = this.cities 
-          else
-          this.citiesMatched = this.cities.filter((city) => {
-            return city.name.toLowerCase().normalize('NFKD').replace(/[^\w]/g, '').indexOf(this.input.toLowerCase().normalize('NFKD').replace(/[^\w]/g, ''))!=-1
-          })
+            for (const town of this.cities)
+              town.match = true
+            else
+              for (const town of this.cities)
+                if(town.name.toLowerCase().normalize('NFKD').replace(/[^\w]/g, '').indexOf(this.input.toLowerCase().normalize('NFKD').replace(/[^\w]/g, ''))!=-1)
+                  town.match = true
+                else
+                  town.match = false
         }
       },
       watch: {
