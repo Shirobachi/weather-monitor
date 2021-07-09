@@ -97,13 +97,6 @@ class weatherController extends Controller
 
             array_push($respons, $temp);
         }
-            
-        // dump($towns);
-        // dump($respons);
-        
-        // town name, last temp, last humanity, 
-
-        // dump($id);
 
         return response($respons, 201);
     }
