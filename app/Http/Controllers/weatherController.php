@@ -86,6 +86,7 @@ class weatherController extends Controller
             $data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
             
             $temp = [];
+            $temp['APIID'] = $t -> city;
             $temp['townName'] = town::where('APIID', $t -> city) -> first() -> name;
             
             if($data == null)
@@ -107,5 +108,26 @@ class weatherController extends Controller
         }
 
         return response($respons, 201);
+    }
+
+    function showMore($id){
+        return view('showMore', compact('id'));
+    }
+
+    function showMoreJSON($id){
+        $infos = weatherInfo::where('townID', $id) -> get();
+
+        $respond = [];
+        $respond['label'] = [];
+        $respond['temp'] = [];
+        $respond['humidity'] = [];
+
+        foreach($infos as $t){
+            array_push($respond['label'], $t->created_at->format('H:i'));
+            array_push($respond['temp'], $t->temp);
+            array_push($respond['humidity'], $t->humidity);
+        }
+
+        return response($respond, 201);
     }
 }
