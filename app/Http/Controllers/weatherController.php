@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\usersCities;
 use App\Models\town;
+use App\Models\weatherInfo;
 
 use Illuminate\Http\Request;
 
@@ -76,6 +77,34 @@ class weatherController extends Controller
     }
 
     function weatherNow($id){
-        dump($id);
+        $towns = usersCities::where('user', $id) -> get();
+        $respons = [];
+
+        foreach($towns as $t){
+            $data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
+            
+            $temp = [];
+            $temp['townName'] = town::where('APIID', $t -> city) -> first() -> name;
+            
+            if($data == null){
+                $temp['temp'] = null;
+                $temp['humidity'] = null;
+            }
+            else{
+                $temp['temp'] = $data -> temp;
+                $temp['humidity'] = $data -> humidity;
+            }
+
+            array_push($respons, $temp);
+        }
+            
+        // dump($towns);
+        // dump($respons);
+        
+        // town name, last temp, last humanity, 
+
+        // dump($id);
+
+        return response($respons, 201);
     }
 }

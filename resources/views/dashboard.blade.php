@@ -18,9 +18,21 @@
           <button id="toggleAll" class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Update following towns!</button>
         </a>
 
-
-
-
+        <div class="row">
+            <div class="col-6 ps-3 py-3" v-for="t in towns">
+              <h1>@{{t.townName}}</h1>
+              <div v-if="t.temp">
+                <div>Temperature - @{{t.temp}}°C</div>
+                <div>Humidity - @{{t.humidity}}%</div>
+                <button type="button" class="btn btn-outline-primary mt-2">See more</button>
+              </div>
+              <div v-else>
+                This data is not available yet ;/
+              </div>
+            </div>
+        </div>
+      
+      </div> <!-- .Vue -->
     </div>
   </div>
 
@@ -28,8 +40,17 @@
   <script>
     const App = {
       data() {
-        return {}
+        return {
+          urlAPI: "/api/weatherNow/{{session()->get('userID')}}",
+          towns: []
+        }
       },
+      created() {
+        axios.get(this.urlAPI, {})
+          .then((response) => {
+            this.towns = response.data.map(x => x) 
+          })
+        },
       methods: {},
     }; Vue.createApp(App).mount('#Vue')
 
