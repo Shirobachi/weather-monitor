@@ -19,7 +19,7 @@
         </a>
 
         <div class="row">
-            <div class="col-6 ps-3 py-3" v-for="t in towns">
+            <div class="col-12 col-md-6 ps-3 py-3" v-for="t in towns">
               <h1>@{{t.townName}}</h1>
               <div v-if="t.temp">
                 <div>Temperature - @{{t.temp}}°C</div>
