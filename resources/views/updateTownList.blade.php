@@ -43,6 +43,8 @@
         return {
           urlAPI: "/api/towns",
           cities: [],
+          urlAPI2: "/api/userTownList/{{session()->get('userID')}}",
+          matchList: [],
           input: ''
         }
       },
@@ -55,7 +57,15 @@
               town.match = true;
             }
           })
-          this.processSearch = _.debounce(this.updateSearch, 200)
+        this.processSearch = _.debounce(this.updateSearch, 200)
+        axios.get(this.urlAPI2, {})
+          .then((response) => {
+            this.matchList = response.data.map(x => x)
+            for (const match of this.matchList) {
+              index = (this.cities.findIndex(x => x.APIID == match))
+              this.cities[index].check = true
+            }
+          })
       },
       methods: {
         updateSearch(){
