@@ -28,7 +28,10 @@ class weatherController extends Controller
     }
 
     function updateCitiesShow(){
-        return view('updateTownList');
+        if(! session()->has('userID'))
+            return redirect(url('/'));
+        else
+            return view('updateTownList');
     }
 
     function getTowns(){
@@ -111,7 +114,18 @@ class weatherController extends Controller
     }
 
     function showMore($id){
-        return view('showMore', compact('id'));
+        if(! session()->has('userID'))
+            return redirect(url('/'));
+        else if(usersCities::where('user', session()->get('userID')) -> where('city', $id) -> count() == 0){
+            $info = array(
+                'title' => 'You not follow this town',
+                'desc' => "To see graph of that town you need to follow it first!",
+                'type' => 'info'
+            );
+            return view('dashboard', compact('info'));
+        }
+        else
+            return view('showMore', compact('id'));
     }
 
     function showMoreJSON($id){

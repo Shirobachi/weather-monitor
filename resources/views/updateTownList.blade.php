@@ -63,7 +63,8 @@
             this.matchList = response.data.map(x => x)
             for (const match of this.matchList) {
               index = (this.cities.findIndex(x => x.APIID == match))
-              this.cities[index].check = true
+              if(index != -1)
+                athis.cities[index].check = true
             }
             this.cities.sort((a, b) => (a.check < b.check) ? 1 : -1)
           })
