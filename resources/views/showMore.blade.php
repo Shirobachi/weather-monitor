@@ -1,6 +1,6 @@
 @extends('common')
 
-@section('title', 'Dashboard!')
+@section('title', 'More informations!')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('common')
 
-@section('title', 'Log in!')
+@section('title', 'Update town list!')
 
 @section('content')
 
@@ -64,7 +64,7 @@
             for (const match of this.matchList) {
               index = (this.cities.findIndex(x => x.APIID == match))
               if(index != -1)
-                athis.cities[index].check = true
+                this.cities[index].check = true
             }
             this.cities.sort((a, b) => (a.check < b.check) ? 1 : -1)
           })
