@@ -19,6 +19,7 @@ use App\Http\Controllers\weatherController;
 Route::get('towns', [weatherController::class, 'getTowns']);
 Route::get('weatherNow/{id}', [weatherController::class, 'weatherNow']);
 Route::get('showMore/{id}', [weatherController::class, 'showMoreJSON']);
+Route::get('userTownList/{id}', [weatherController::class, 'getUserTownList']);
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

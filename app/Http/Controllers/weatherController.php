@@ -137,4 +137,16 @@ class weatherController extends Controller
 
         return response($respond, 201);
     }
+
+    function getUserTownList($id){
+
+        $list = usersCities::where('user', $id) -> get();
+
+        $respond = [];
+
+        foreach($list as $l)
+            array_push($respond, $l->city);
+
+        return response($respond, 201);
+    }
 }
