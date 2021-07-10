@@ -127,7 +127,7 @@ class weatherController extends Controller
             array_push($temp, $t->temp);
             array_push($humidity, $t->humidity);
             array_push($label, $t->created_at->format('d') . 
-                ( $t->created_at->format('d') % 10 == 1 ? 'st' : $t->created_at->format('d') % 10 == 2 ? 'nd' : 'th' ) . 
+                ( $t->created_at->format('d') % 10 == 1 ? 'st' : ($t->created_at->format('d') % 10 == 2 ? 'nd' : 'th' )) . 
                 ' of ' . $t->created_at->format('F H:i'));
         }
 
