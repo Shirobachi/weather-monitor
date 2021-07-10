@@ -65,6 +65,7 @@
               index = (this.cities.findIndex(x => x.APIID == match))
               this.cities[index].check = true
             }
+            this.cities.sort((a, b) => (a.check < b.check) ? 1 : -1)
           })
       },
       methods: {
@@ -72,12 +73,13 @@
           if (this.input == '')
             for (const town of this.cities)
               town.match = true
-            else
-              for (const town of this.cities)
-                if(town.name.toLowerCase().normalize('NFKD').replace(/[^\w]/g, '').indexOf(this.input.toLowerCase().normalize('NFKD').replace(/[^\w]/g, ''))!=-1)
-                  town.match = true
-                else
-                  town.match = false
+          else
+            for (const town of this.cities)
+              if(town.name.toLowerCase().normalize('NFKD').replace(/[^\w]/g, '').indexOf(this.input.toLowerCase().normalize('NFKD').replace(/[^\w]/g, ''))!=-1)
+                town.match = true
+              else
+                town.match = false
+          this.cities.sort((a, b) => (a.check < b.check) ? 1 : -1)
         }
       },
       watch: {
