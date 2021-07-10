@@ -67,5 +67,8 @@ class weather extends Command
         }
 
         weatherInfo::insert($data);
+
+        // Remove all data older than day
+        weatherInfo::where('created_at', '<', now() -> addDay(-1)) -> delete();
     }
 }
