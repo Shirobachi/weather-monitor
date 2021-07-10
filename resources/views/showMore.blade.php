@@ -14,9 +14,11 @@
       @endif
 
       <div class="row">
-        <a href="{{url('dashboard')}}">
-          <button id="toggleAll" class="btn btn-outline-success mb-2 input-block-level form-control" type="button">Dashboard!</button>
-        </a>
+        <div class="col-8 offset-2">
+          <a href="{{url('dashboard')}}">
+            <button class="btn btn-outline-success mb-2 input-block-level form-control" type="button">Dashboard!</button>
+          </a>
+        </div>
 
         <div class="col-xl-6 col-12">
           <canvas id="temp"></canvas>

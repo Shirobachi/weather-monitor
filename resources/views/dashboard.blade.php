@@ -14,9 +14,11 @@
       @endif
 
       <div id="Vue">
-        <a href="{{url('updateCities')}}">
-          <button id="toggleAll" class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Update following towns!</button>
-        </a>
+        <div class="col-8 offset-2">
+          <a href="{{url('updateCities')}}">
+            <button class="btn btn-outline-info mb-2 input-block-level form-control" type="button">Update following towns!</button>
+          </a>
+        </div>
 
         <div class="row">
             <div class="col-12 col-md-6 ps-3 py-3" v-for="t in towns">
