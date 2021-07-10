@@ -118,15 +118,22 @@ class weatherController extends Controller
         $infos = weatherInfo::where('townID', $id) -> get();
 
         $respond = [];
-        $respond['label'] = [];
-        $respond['temp'] = [];
-        $respond['humidity'] = [];
+
+        $temp = [];
+        $humidity = [];
+        $label = [];
 
         foreach($infos as $t){
-            array_push($respond['label'], $t->created_at->format('H:i'));
-            array_push($respond['temp'], $t->temp);
-            array_push($respond['humidity'], $t->humidity);
+            array_push($temp, $t->temp);
+            array_push($humidity, $t->humidity);
+            array_push($label, $t->created_at->format('d') . 
+                ( $t->created_at->format('d') % 10 == 1 ? 'st' : $t->created_at->format('d') % 10 == 2 ? 'nd' : 'th' ) . 
+                ' of ' . $t->created_at->format('F H:i'));
         }
+
+        array_push($respond, $label, $temp, $humidity);
+        // array_push($respond, $temp);
+        // array_push($respond, $humidity);
 
         return response($respond, 201);
     }
