@@ -73,7 +73,7 @@ setTimeout(() => {
       data: {
           labels: label,
           datasets: [{
-              label: 'Temperature',
+              label: 'Huminidity',
               data: humidity,
               backgroundColor: 'rgba(0, 0, 255, 0.2)',
               borderColor: 'rgba(0, 0, 255, 0.2)',
