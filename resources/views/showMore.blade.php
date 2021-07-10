@@ -64,7 +64,19 @@ setTimeout(() => {
           display: true,
           text: 'Weathe at .. last 24 hours!'
         }
+      },
+      options: {
+        scales: {
+          y: {
+            ticks: {
+              callback: function(value, index, values) {
+                  return value + '°C';
+              }
+            }
+          }
       }
+    }
+
   });
 }, 1000);
 
@@ -91,7 +103,18 @@ setTimeout(() => {
           display: true,
           text: 'Weathe at .. last 24 hours!'
         }
+      },
+      options: {
+        scales: {
+          y: {
+            ticks: {
+              callback: function(value, index, values) {
+                  return value + '%';
+              }
+            }
+          }
       }
+    }
   });
 }, 1000);
 
