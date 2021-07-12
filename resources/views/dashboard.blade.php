@@ -73,6 +73,9 @@
                 <a :href="t.URL">
                   <button type="button" class="btn btn-outline-primary mt-2">See more</button>
                 </a>
+                <a :href="t.removeURL">
+                  <button type="button" class="btn btn-outline-danger mt-2">Remove</button>
+                </a>
               </div>
               <div v-else>
                 This data is not available yet ;/
@@ -101,6 +104,7 @@
             this.towns = response.data
             for (const town of this.towns){
               town.URL = "/showMore/" + town.APIID
+              town.removeURL = "/remove/" + town.APIID
             }
           })
 
