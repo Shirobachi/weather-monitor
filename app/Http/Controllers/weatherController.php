@@ -35,7 +35,13 @@ class weatherController extends Controller
     }
 
     function getTowns(){
-        return response(town::all(), 201);
+        $temp = town::select('name') -> distinct() -> get();
+        $respond = [];
+
+        foreach($temp as $t)
+            array_push($respond, $t->name);
+        
+        return response($respond, 201);
     }
 
     function updateCities(request $r){
