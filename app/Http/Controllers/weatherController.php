@@ -216,4 +216,26 @@ class weatherController extends Controller
             return view('dashboard', compact('info'));
         }
     }
+
+    function removeTown($id){
+        if(usersCities::where('user', session()->get('userID')) -> where('city', $id) -> count() == 0 ){
+            $info = array(
+                'title' => 'Wrong town',
+                'desc' => "Did you tried to mess up?!",
+                'type' => 'danger'
+            );
+
+            return view('dashboard', compact('info'));
+        }
+        else{
+            $town = usersCities::where('user', session()->get('userID')) -> where('city', $id) -> delete();
+            $info = array(
+                'title' => 'Removed',
+                'desc' => "You not following this town anymore",
+            );
+
+            return view('dashboard', compact('info'));
+        }
+
+    }
 }
