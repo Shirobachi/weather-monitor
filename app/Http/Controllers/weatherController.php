@@ -21,7 +21,7 @@ class weatherController extends Controller
                 'desc' => "Follow some towns before you see dashbord!",
                 'type' => 'warning'
             );
-            return view('updateTownList', compact('info'));
+            return view('dashboard', compact('info'));
         }
 
         return view('dashboard');
