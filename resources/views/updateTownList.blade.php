@@ -51,7 +51,7 @@
       created() {
         axios.get(this.urlAPI, {})
           .then((response) => {
-            this.cities = response.data.map(x => x)
+            this.cities = response.data
             for (const town of this.cities) {
               town.check = false;
               town.match = true;
@@ -60,7 +60,7 @@
         this.processSearch = _.debounce(this.updateSearch, 200)
         axios.get(this.urlAPI2, {})
           .then((response) => {
-            this.matchList = response.data.map(x => x)
+            this.matchList = response.data
             for (const match of this.matchList) {
               index = (this.cities.findIndex(x => x.APIID == match))
               if(index != -1)
