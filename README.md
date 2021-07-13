@@ -9,7 +9,7 @@ Website to monitor the weather
 The website is let you to follow up to 10 towns
 ![image how looks choosing towns](https://i.imgur.com/LjU71uJ.png)
 
-After that you will see list of them with temperature and huminidity
+After that you will see list of them with temperature and humidity
 ![Image how looks list of towns](https://i.imgur.com/tSw2TOf.png)
 
 And you can click more for charts of temperature from last 24 hours
