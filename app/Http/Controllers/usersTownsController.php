@@ -63,17 +63,28 @@ class usersTownsController extends Controller
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+		
+		function show($id){
+			$infos = weatherInfo::where('townID', $id) -> get();
+	
+			$respond = [];
+	
+			$temp = [];
+			$humidity = [];
+			$label = [];
+	
+			foreach($infos as $t){
+				array_push($temp, $t->temp);
+				array_push($humidity, $t->humidity);
+				array_push($label, $t->created_at->format('d') . 
+					( $t->created_at->format('d') % 10 == 1 ? 'st' : ($t->created_at->format('d') % 10 == 2 ? 'nd' : 'th' )) . 
+					' of ' . $t->created_at->format('F H:i'));
+			}
+	
+			array_push($respond, $label, $temp, $humidity);
+	
+			return response($respond, 201);
+		}
 
     /**
      * Show the form for editing the specified resource.

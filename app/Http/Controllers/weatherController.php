@@ -102,30 +102,6 @@ class weatherController extends Controller
 			return view('showMore', compact('id'));
 	}
 
-	function showMoreJSON($id){
-		$infos = weatherInfo::where('townID', $id) -> get();
-
-		$respond = [];
-
-		$temp = [];
-		$humidity = [];
-		$label = [];
-
-		foreach($infos as $t){
-			array_push($temp, $t->temp);
-			array_push($humidity, $t->humidity);
-			array_push($label, $t->created_at->format('d') . 
-				( $t->created_at->format('d') % 10 == 1 ? 'st' : ($t->created_at->format('d') % 10 == 2 ? 'nd' : 'th' )) . 
-				' of ' . $t->created_at->format('F H:i'));
-		}
-
-		array_push($respond, $label, $temp, $humidity);
-		// array_push($respond, $temp);
-		// array_push($respond, $humidity);
-
-		return response($respond, 201);
-	}
-
 	function getUserTownList($id){
 
 		$list = usersCities::where('user', $id) -> get();
