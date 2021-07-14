@@ -23,4 +23,4 @@ Route::post('addTown', [usersTownsController::class, 'update']);
 
 Route::get('showMore/{id}', [weatherController::class, 'showMore']);
 
-Route::get('remove/{id}', [weatherController::class, 'removeTown']);
+Route::get('remove/{id}', [usersTownsController::class, 'destroy']);

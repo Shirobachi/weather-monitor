@@ -133,14 +133,25 @@ class usersTownsController extends Controller
 		}
 	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    function destroy($id){
+		if(usersCities::where('user', session()->get('userID')) -> where('city', $id) -> count() == 0 ){
+			$info = array(
+				'title' => 'Wrong town',
+				'desc' => "Did you tried to mess up?!",
+				'type' => 'danger'
+			);
+
+			return view('dashboard', compact('info'));
+		}
+		else{
+			$town = usersCities::where('user', session()->get('userID')) -> where('city', $id) -> delete();
+			$info = array(
+				'title' => 'Removed',
+				'desc' => "You not following this town anymore",
+			);
+
+			return view('dashboard', compact('info'));
+		}
+	}
+	
 }
