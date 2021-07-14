@@ -42,27 +42,6 @@ class usersTownsController extends Controller
 
 		return response($respond, 201);
 	}
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 		
 		function show($id){
 			$infos = weatherInfo::where('townID', $id) -> get();
@@ -85,19 +64,8 @@ class usersTownsController extends Controller
 	
 			return response($respond, 201);
 		}
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
     
-    function update(request $r){
+    function store(request $r){
 		$town = town::where('name', $r->town) -> first();
 
 		if(! $town){
