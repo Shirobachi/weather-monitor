@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\weatherController;
+use App\Http\Controllers\accessController;
 use App\Http\Controllers\usersTownsController;
 use App\Http\Controllers\townController;
 

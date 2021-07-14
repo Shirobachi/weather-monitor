@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\usersCities;
-use App\Models\town;
-use App\Models\weatherInfo;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-
-class weatherController extends Controller
+class accessController extends Controller
 {
 	function dashboard(){
 		if(! session()->has('userID'))
