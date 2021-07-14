@@ -13,6 +13,10 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'registerSuccess' => "Register successful",
+    'wrong' => 'Wrong town',
+    'removed' => 'Town removed',
+    'added' => 'Town added',
+    'limit' => 'You can make up to 10 following towns',
+    'alreadyFollowed' => 'You cannot add town to follow what you already following!',
+
 ];

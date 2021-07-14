@@ -70,8 +70,7 @@ class usersTownsController extends Controller
 
 		if(! $town){
 			$info = array(
-				'title' => 'Wrong town',
-				'desc' => "Did you tried to mess up?!",
+				'desc' => __('town.wrong'),
 				'type' => 'danger'
 			);
 
@@ -79,8 +78,7 @@ class usersTownsController extends Controller
 		}
 		else if(usersCities::where('user', session()->get('userID')) -> where('city', $town->APIID) -> count() > 0){
 			$info = array(
-				'title' => 'You already follow it',
-				'desc' => "You cannot add town to follow what you already following!",
+				'desc' => __('town.alreadyFollowed'),
 				'type' => 'warning'
 			);
 
@@ -88,8 +86,7 @@ class usersTownsController extends Controller
 		}
 		else if(usersCities::where('user', session()->get('userID')) -> count() >= 10){
 			$info = array(
-				'title' => 'You are NOT a VIP',
-				'desc' => 'You can make up to 10 following towns!',
+				'desc' => __('town.limit'),
 				'type' => 'warning'
 			);
 
@@ -104,8 +101,7 @@ class usersTownsController extends Controller
 			usersCities::create($temp);
 
 			$info = array(
-				'title' => 'Added',
-				'desc' => "Now we'll collect info about this town for you ;)",
+				'desc' => __('town.added'),
 			);
 
 			return view('dashboard', compact('info'));
@@ -115,8 +111,7 @@ class usersTownsController extends Controller
     function destroy($id){
 		if(usersCities::where('user', session()->get('userID')) -> where('city', $id) -> count() == 0 ){
 			$info = array(
-				'title' => 'Wrong town',
-				'desc' => "Did you tried to mess up?!",
+				'desc' => __('town.wrong'),
 				'type' => 'danger'
 			);
 
@@ -125,8 +120,7 @@ class usersTownsController extends Controller
 		else{
 			$town = usersCities::where('user', session()->get('userID')) -> where('city', $id) -> delete();
 			$info = array(
-				'title' => 'Removed',
-				'desc' => "You not following this town anymore",
+				'desc' => __('town.removed'),
 			);
 
 			return view('dashboard', compact('info'));

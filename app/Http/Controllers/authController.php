@@ -17,9 +17,8 @@ class authController extends Controller
             return redirect(url('dashboard'));
         }
         else{
+            $info['desc'] = __('auth.failed');
             $info['type'] = 'danger';
-            $info['title'] = 'Account not found!';
-            $info['desc'] = 'Login or/and password is/are wrong!';
             return view('auth/login', compact('info'));
         }
     }
@@ -38,8 +37,7 @@ class authController extends Controller
 
         user::create($temp);
 
-        $info['title'] = 'Register successful';
-        $info['desc'] = 'You can log in now!';
+        $info['title'] = __('auth.registerSuccess');
 
         return(view('auth/login', compact('info')));
     }

@@ -12,8 +12,8 @@ class accessController extends Controller
 
 		if(usersCities::where('user', session()->get('userID'))->get()->count() == 0){
 			$info = array(
-				'title' => 'No following towns yet',
-				'desc' => "Follow some towns before you see dashboard!",
+				'title' => __('notifications.noFollowedTownTitle'),
+				'desc' => __('notifications.noFollowedTownDesc'),
 				'type' => 'warning'
 			);
 			return view('dashboard', compact('info'));
@@ -27,8 +27,8 @@ class accessController extends Controller
 			return redirect(url('/'));
 		else if(usersCities::where('user', session()->get('userID')) -> where('city', $id) -> count() == 0){
 			$info = array(
-				'title' => 'You not follow this town',
-				'desc' => "To see graph of that town you need to follow it first!",
+				'title' => __('notifications.noFollowingTitle'),
+				'desc' => __('notifications.noFollowingDesc'),
 				'type' => 'info'
 			);
 			return view('dashboard', compact('info'));

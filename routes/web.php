@@ -22,3 +22,7 @@ Route::post('addTown', [usersTownsController::class, 'store']);
 Route::get('showMore/{id}', [accessController::class, 'showMore']);
 
 Route::get('remove/{id}', [usersTownsController::class, 'destroy']);
+
+Route::get('/test', function () {
+  dd(__('auth.failed'));
+});
