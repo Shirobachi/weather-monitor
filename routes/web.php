@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\weatherController;
-
+use App\Http\Controllers\usersTownsController;
 
 Route::get('/', [authController::class, 'login']);
 Route::post('/', [authController::class, 'tryLogin']);
@@ -19,7 +19,7 @@ Route::get('/logout', function () {
 Route::get('dashboard', [weatherController::class, 'dashboard']);
 Route::get('updateCities', [weatherController::class, 'updateCitiesShow']);
 Route::post('updateCities', [weatherController::class, 'updateCities']);
-Route::post('addTown', [weatherController::class, 'addTown']);
+Route::post('addTown', [usersTownsController::class, 'update']);
 
 Route::get('showMore/{id}', [weatherController::class, 'showMore']);
 

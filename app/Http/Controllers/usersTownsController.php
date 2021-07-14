@@ -85,18 +85,53 @@ class usersTownsController extends Controller
     {
         //
     }
+    
+    function update(request $r){
+		$town = town::where('name', $r->town) -> first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+		if(! $town){
+			$info = array(
+				'title' => 'Wrong town',
+				'desc' => "Did you tried to mess up?!",
+				'type' => 'danger'
+			);
+
+			return view('dashboard', compact('info'));
+		}
+		else if(usersCities::where('user', session()->get('userID')) -> where('city', $town->APIID) -> count() > 0){
+			$info = array(
+				'title' => 'You already follow it',
+				'desc' => "You cannot add town to follow what you already following!",
+				'type' => 'warning'
+			);
+
+			return view('dashboard', compact('info'));
+		}
+		else if(usersCities::where('user', session()->get('userID')) -> count() >= 10){
+			$info = array(
+				'title' => 'You are NOT a VIP',
+				'desc' => 'You can make up to 10 following towns!',
+				'type' => 'warning'
+			);
+
+			return view('dashboard', compact('info'));
+		}
+		else{
+			$temp = array(
+				'user' => session()->get('userID'),
+				'city' => $town -> APIID
+			);
+
+			usersCities::create($temp);
+
+			$info = array(
+				'title' => 'Added',
+				'desc' => "Now we'll collect info about this town for you ;)",
+			);
+
+			return view('dashboard', compact('info'));
+		}
+	}
 
     /**
      * Remove the specified resource from storage.
