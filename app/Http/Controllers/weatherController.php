@@ -87,38 +87,6 @@ class weatherController extends Controller
 		return view('dashboard', compact('info'));
 	}
 
-	function weatherNow($id){
-		$towns = usersCities::where('user', $id) -> get();
-		$respond = [];
-
-		foreach($towns as $t){
-			$data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
-			
-			$temp = [];
-			$temp['APIID'] = $t -> city;
-			$temp['townName'] = town::where('APIID', $t -> city) -> first() -> name;
-			
-			if($data == null)
-			{
-				try{
-					Artisan::call('weather:pull');
-					$data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
-				}
-				catch (SomeException $e){
-					$temp['temp'] = null;
-					$temp['humidity'] = null; 
-				}
-			}
-				
-			$temp['temp'] = $data -> temp;
-			$temp['humidity'] = $data -> humidity;
-
-			array_push($respond, $temp);
-		}
-
-		return response($respond, 201);
-	}
-
 	function showMore($id){
 		if(! session()->has('userID'))
 			return redirect(url('/'));

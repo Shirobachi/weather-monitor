@@ -2,19 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\usersCities;
+use App\Models\town;
+use App\Models\weatherInfo;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class usersTownsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+	function index($id){
+		$towns = usersCities::where('user', $id) -> get();
+		$respond = [];
+
+		foreach($towns as $t){
+			$data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
+			
+			$temp = [];
+			$temp['APIID'] = $t -> city;
+			$temp['townName'] = town::where('APIID', $t -> city) -> first() -> name;
+			
+			if($data == null)
+			{
+				try{
+					Artisan::call('weather:pull');
+					$data = weatherInfo::where('townID', $t -> city) -> orderBy('created_at', 'desc') -> first();
+				}
+				catch (SomeException $e){
+					$temp['temp'] = null;
+					$temp['humidity'] = null; 
+				}
+			}
+				
+			$temp['temp'] = $data -> temp;
+			$temp['humidity'] = $data -> humidity;
+
+			array_push($respond, $temp);
+		}
+
+		return response($respond, 201);
+	}
 
     /**
      * Show the form for creating a new resource.

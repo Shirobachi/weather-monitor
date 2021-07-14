@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\weatherController;
+use App\Http\Controllers\usersTownsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\weatherController;
 */
 
 Route::get('towns', [weatherController::class, 'getTowns']);
-Route::get('weatherNow/{id}', [weatherController::class, 'weatherNow']);
+Route::get('weatherNow/{id}', [usersTownsController::class, 'index']);
 Route::get('showMore/{id}', [weatherController::class, 'showMoreJSON']);
 Route::get('userTownList/{id}', [weatherController::class, 'getUserTownList']);
 
