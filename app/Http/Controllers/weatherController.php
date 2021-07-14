@@ -27,16 +27,6 @@ class weatherController extends Controller
 		return view('dashboard');
 	}
 
-	function getTowns(){
-		$temp = town::select('name') -> distinct() -> get();
-		$respond = [];
-
-		foreach($temp as $t)
-			array_push($respond, $t->name);
-		
-		return response($respond, 201);
-	}
-
 	function showMore($id){
 		if(! session()->has('userID'))
 			return redirect(url('/'));

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\weatherController;
 use App\Http\Controllers\usersTownsController;
+use App\Http\Controllers\townController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\usersTownsController;
 |
 */
 
-Route::get('towns', [weatherController::class, 'getTowns']);
+Route::get('towns', [townController::class, 'index']);
 Route::get('weatherNow/{id}', [usersTownsController::class, 'index']);
 Route::get('showMore/{id}', [usersTownsController::class, 'show']);
 
