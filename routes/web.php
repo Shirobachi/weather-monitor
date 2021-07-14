@@ -10,7 +10,7 @@ Route::get('/', [accessController::class, 'login']);
 Route::post('/', [authController::class, 'tryLogin']);
 
 Route::get('register', [accessController::class, 'register']);
-Route::post('register', [authController::class, 'signup']);
+Route::post('register', [authController::class, 'create']);
 
 Route::get('/logout', function () {
   session()->forget('userID');

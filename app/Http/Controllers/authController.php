@@ -24,7 +24,7 @@ class authController extends Controller
         }
     }
 
-    function signup(request $r){
+    function create(request $r){
         $r -> validate([
             'login' => "min:3|max:15|required|unique:users",
             'e-mail' => "email:rfc,dns|unique:users",
