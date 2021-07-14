@@ -15,6 +15,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
+    
+    <link href="{{ asset('css/common.css') }}" rel="stylesheet" />
 
     <title>@yield('title')</title>
   </head>
@@ -31,7 +33,7 @@
 
     @if(session()->has('userID'))
       <a href="{{url('/logout')}}">
-        <i style="position: fixed; left: 35px; top: 35px;" class="text-success border border-success border-2 px-2 py-1 rounded h1 bi bi-box-arrow-right" data-bs-toggle="tooltip" data-bs-placement="right" title="Log out!"></i>
+        <i class="logout text-success border border-success border-2 px-2 py-1 rounded h1 bi bi-box-arrow-right" data-bs-toggle="tooltip" data-bs-placement="right" title="Log out!"></i>
       </a>
     @endif
 
