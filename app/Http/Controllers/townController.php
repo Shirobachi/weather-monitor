@@ -8,6 +8,7 @@ use App\Models\town;
 
 class townController extends Controller
 {
+
 	function index(){
 		$temp = town::select('name') -> distinct() -> get();
 		$respond = [];
