@@ -17,8 +17,7 @@ Route::get('/logout', function () {
   return redirect(url('/'));
 });
 Route::get('dashboard', [weatherController::class, 'dashboard']);
-Route::get('updateCities', [weatherController::class, 'updateCitiesShow']);
-Route::post('addTown', [usersTownsController::class, 'update']);
+Route::post('addTown', [usersTownsController::class, 'store']);
 
 Route::get('showMore/{id}', [weatherController::class, 'showMore']);
 

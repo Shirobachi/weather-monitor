@@ -27,13 +27,6 @@ class weatherController extends Controller
 		return view('dashboard');
 	}
 
-	function updateCitiesShow(){
-		if(! session()->has('userID'))
-			return redirect(url('/'));
-		else
-			return view('updateTownList');
-	}
-
 	function getTowns(){
 		$temp = town::select('name') -> distinct() -> get();
 		$respond = [];
