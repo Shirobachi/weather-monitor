@@ -36,4 +36,18 @@ class accessController extends Controller
 		else
 			return view('showMore', compact('id'));
 	}
+
+	function login(){
+		if(session()->has('userID'))
+				return redirect(url('dashboard'));
+		else
+				return view('auth/login');
+	}
+    
+	function register(){
+			if(session()->has('userID'))
+					return redirect(url('dashboard'));
+			else
+					return view('auth/register');
+	}
 }

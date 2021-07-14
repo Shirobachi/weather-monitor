@@ -9,13 +9,6 @@ use App\Models\user;
 
 class authController extends Controller
 {
-    function login(){
-        if(session()->has('userID'))
-            return redirect(url('dashboard'));
-        else
-            return view('auth/login');
-    }
-
     function tryLogin(request $r){
         $user = user::where('login', $r->login) -> first();
 
@@ -29,13 +22,6 @@ class authController extends Controller
             $info['desc'] = 'Login or/and password is/are wrong!';
             return view('auth/login', compact('info'));
         }
-    }
-    
-    function register(){
-        if(session()->has('userID'))
-            return redirect(url('dashboard'));
-        else
-            return view('auth/register');
     }
 
     function signup(request $r){

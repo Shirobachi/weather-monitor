@@ -6,10 +6,10 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\accessController;
 use App\Http\Controllers\usersTownsController;
 
-Route::get('/', [authController::class, 'login']);
+Route::get('/', [accessController::class, 'login']);
 Route::post('/', [authController::class, 'tryLogin']);
 
-Route::get('register', [authController::class, 'register']);
+Route::get('register', [accessController::class, 'register']);
 Route::post('register', [authController::class, 'signup']);
 
 Route::get('/logout', function () {
